@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "690677054248",
-    "project_id": "pharmaguide-ddbaf",
-    "storage_bucket": "pharmaguide-ddbaf.firebasestorage.app"
+    "project_number": "123456789012",
+    "project_id": "pharmaguide-tn",
+    "storage_bucket": "pharmaguide-tn.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:690677054248:android:4c09e21d5411d921fc6e1d",
+        "mobilesdk_app_id": "1:123456789012:android:0000000000000000000000",
         "android_client_info": {
           "package_name": "com.pharmaguide.tn.pharmaguide_tn"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAka71bg5NcaWu67D1hMgacZp7CBt2JonI"
+          "current_key": "YOUR_FIREBASE_API_KEY_HERE"
         }
       ],
       "services": {
