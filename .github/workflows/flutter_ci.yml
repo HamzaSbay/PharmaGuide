@@ -1,0 +1,103 @@
+name: PharmaGuide TN CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  analyze_and_test:
+    name: Lint, Test & Web Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Generate Localization
+        run: flutter gen-l10n
+
+      - name: Static Analysis
+        run: flutter analyze --no-pub
+
+      - name: Run Unit & Widget Tests
+        run: flutter test
+
+      - name: Build Web Production Bundle
+        run: flutter build web --release
+
+  build_android:
+    name: Build Android APK
+    needs: analyze_and_test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Generate Localization
+        run: flutter gen-l10n
+
+      - name: Build Android APK (Debug / Release)
+        run: flutter build apk --debug
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug-apk
+          path: build/app/outputs/flutter-apk/app-debug.apk
+
+  build_ios:
+    name: Build iOS IPA (No Codesign)
+    needs: analyze_and_test
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Install Dependencies
+        run: flutter pub get
+
+      - name: Generate Localization
+        run: flutter gen-l10n
+
+      - name: Build iOS Application
+        run: flutter build ios --no-codesign

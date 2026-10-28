@@ -1,0 +1,37 @@
+[
+  {
+    "drug1": "Paracétamol",
+    "drug2": "Alcool",
+    "severity": "HIGH",
+    "description": "Risque accru de toxicité hépatique (hépatotoxicité grave). Eviter la prise simultanée d'alcool avec le paracétamol.",
+    "recommendation": "Ne pas consommer d'alcool pendant la durée du traitement au paracétamol."
+  },
+  {
+    "drug1": "Aspirine",
+    "drug2": "Sintrom",
+    "severity": "CRITICAL",
+    "description": "Risque hémorragique majeur. L'association d'anti-inflammatoires/aspirine avec les antivitamines K augmente sévèrement le risque de saignement interne.",
+    "recommendation": "Contre-indication formelle. Consultez immédiatement votre médecin ou pharmacien."
+  },
+  {
+    "drug1": "Aspirine",
+    "drug2": "Ibuprofène",
+    "severity": "MODERATE",
+    "description": "Compétition au niveau des récepteurs et augmentation des effets secondaires gastro-intestinaux (ulcères, gastrites).",
+    "recommendation": "Eviter de cumuler deux anti-inflammatoires non stéroïdiens (AINS)."
+  },
+  {
+    "drug1": "Metformine",
+    "drug2": "Produits de contraste iodés",
+    "severity": "HIGH",
+    "description": "Risque d'acidose lactique en cas d'insuffisance rénale induite par le produit de contraste.",
+    "recommendation": "Arrêter la Metformine 48h avant et après un examen radiologique avec produit de contraste."
+  },
+  {
+    "drug1": "Amoxicilline",
+    "drug2": "Allopurinol",
+    "severity": "MODERATE",
+    "description": "Risque accru d'éruptions cutanées d'origine allergique.",
+    "recommendation": "Signalez immédiatement toute éruption cutanée à votre pharmacien."
+  }
+]
