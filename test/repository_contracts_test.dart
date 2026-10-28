@@ -87,7 +87,7 @@ void main() {
 
       expect(result.isSuccess, isTrue);
       final res = result.data;
-      expect(res.status, equals(ReservationStatus.PENDING));
+      expect(res.status, equals(ReservationStatus.pending));
       expect(res.patientId, equals(uid));
     });
 
@@ -115,11 +115,11 @@ void main() {
 
       final latest = repo.b2bRequests.first;
       expect(latest.quantity, equals(3));
-      expect(latest.status, equals(B2BRequestStatus.PENDING));
+      expect(latest.status, equals(B2BRequestStatus.pending));
 
-      await repo.updateB2BRequestStatus(latest.id, B2BRequestStatus.APPROVED);
+      await repo.updateB2BRequestStatus(latest.id, B2BRequestStatus.approved);
       final updated = repo.b2bRequests.firstWhere((r) => r.id == latest.id);
-      expect(updated.status, equals(B2BRequestStatus.APPROVED));
+      expect(updated.status, equals(B2BRequestStatus.approved));
     });
 
     test('IFamilyProfileRepository manages profiles', () async {

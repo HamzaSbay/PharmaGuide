@@ -1,7 +1,7 @@
 import 'drug_model.dart';
 import 'pharmacy_model.dart';
 
-enum ReservationStatus { PENDING, CONFIRMED, COLLECTED, EXPIRED, DECLINED }
+enum ReservationStatus { pending, confirmed, collected, expired, declined }
 
 class ReservationModel {
   final String id;
@@ -23,7 +23,7 @@ class ReservationModel {
     required this.pharmacyId,
     required this.drugId,
     this.prescriptionImageUrl,
-    this.status = ReservationStatus.PENDING,
+    this.status = ReservationStatus.pending,
     required this.createdAt,
     required this.expiresAt,
     this.drug,
@@ -70,15 +70,15 @@ class ReservationModel {
   static ReservationStatus _parseStatus(String? statusStr) {
     switch (statusStr?.toUpperCase()) {
       case 'CONFIRMED':
-        return ReservationStatus.CONFIRMED;
+        return ReservationStatus.confirmed;
       case 'COLLECTED':
-        return ReservationStatus.COLLECTED;
+        return ReservationStatus.collected;
       case 'EXPIRED':
-        return ReservationStatus.EXPIRED;
+        return ReservationStatus.expired;
       case 'DECLINED':
-        return ReservationStatus.DECLINED;
+        return ReservationStatus.declined;
       default:
-        return ReservationStatus.PENDING;
+        return ReservationStatus.pending;
     }
   }
 
@@ -90,7 +90,7 @@ class ReservationModel {
       'pharmacy_id': pharmacyId,
       'drug_id': drugId,
       'prescription_image_url': prescriptionImageUrl,
-      'status': status.name,
+      'status': status.name.toUpperCase(),
       'created_at': createdAt.toIso8601String(),
       'expires_at': expiresAt.toIso8601String(),
       if (drug != null) 'drug': drug!.toJson(),

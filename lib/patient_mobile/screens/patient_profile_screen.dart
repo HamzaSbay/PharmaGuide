@@ -77,7 +77,7 @@ class _PatientProfileScreenState extends State<PatientProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final activeReservations = _mockDataService.reservations.where((r) => 
-      r.status == ReservationStatus.PENDING || r.status == ReservationStatus.CONFIRMED).length;
+      r.status == ReservationStatus.pending || r.status == ReservationStatus.confirmed).length;
     final chronicRemindersCount = _mockDataService.chronicReminders.length;
     final currentUser = _authService.currentUser;
     final phone = currentUser?.phone ?? 'Non connecté';

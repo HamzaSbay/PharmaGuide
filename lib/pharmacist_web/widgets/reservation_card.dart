@@ -63,10 +63,10 @@ class ReservationCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
         side: BorderSide(
-          color: reservation.status == ReservationStatus.PENDING
+          color: reservation.status == ReservationStatus.pending
               ? AppTheme.accentAmber
               : AppTheme.borderGrey,
-          width: reservation.status == ReservationStatus.PENDING ? 1.5 : 1.0,
+          width: reservation.status == ReservationStatus.pending ? 1.5 : 1.0,
         ),
       ),
       child: Padding(
@@ -152,7 +152,7 @@ class ReservationCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 14),
-            if (reservation.status == ReservationStatus.PENDING)
+            if (reservation.status == ReservationStatus.pending)
               Row(
                 children: [
                   Expanded(
@@ -168,7 +168,7 @@ class ReservationCard extends StatelessWidget {
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.pop(ctx);
-                                  SupabaseService().updateReservationStatus(reservation.id, ReservationStatus.DECLINED);
+                                  SupabaseService().updateReservationStatus(reservation.id, ReservationStatus.declined);
                                 },
                                 style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
                                 child: const Text('Refuser', style: TextStyle(color: Colors.white)),
@@ -198,7 +198,7 @@ class ReservationCard extends StatelessWidget {
                   Expanded(
                     child: ElevatedButton.icon(
                       onPressed: () {
-                        SupabaseService().updateReservationStatus(reservation.id, ReservationStatus.CONFIRMED);
+                        SupabaseService().updateReservationStatus(reservation.id, ReservationStatus.confirmed);
                       },
                       icon: const Icon(Icons.check, size: 18),
                       label: const Text('Accepter (Bloquer 2h)'),

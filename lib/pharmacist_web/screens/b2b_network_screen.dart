@@ -282,18 +282,18 @@ class _B2bNetworkScreenState extends State<B2bNetworkScreen> {
                                     style: TextStyle(fontSize: 11, fontStyle: FontStyle.italic, color: Colors.grey.shade800),
                                   ),
                                 ],
-                                if (req.targetPharmacyId == widget.pharmacyId && req.status == B2BRequestStatus.PENDING) ...[
+                                if (req.targetPharmacyId == widget.pharmacyId && req.status == B2BRequestStatus.pending) ...[
                                   const SizedBox(height: 8),
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       TextButton(
-                                        onPressed: () => _mockData.updateB2BRequestStatus(req.id, B2BRequestStatus.REJECTED),
+                                        onPressed: () => _mockData.updateB2BRequestStatus(req.id, B2BRequestStatus.rejected),
                                         child: const Text('Refuser', style: TextStyle(color: Colors.red)),
                                       ),
                                       const SizedBox(width: 8),
                                       ElevatedButton(
-                                        onPressed: () => _mockData.updateB2BRequestStatus(req.id, B2BRequestStatus.APPROVED),
+                                        onPressed: () => _mockData.updateB2BRequestStatus(req.id, B2BRequestStatus.approved),
                                         style: ElevatedButton.styleFrom(backgroundColor: AppTheme.pharmacyGreen),
                                         child: const Text('Accepter'),
                                       ),

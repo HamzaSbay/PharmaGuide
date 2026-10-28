@@ -19,7 +19,7 @@ class GardeCalendarScreen extends StatefulWidget {
 class _GardeCalendarScreenState extends State<GardeCalendarScreen> {
   final MockDataService _mockData = MockDataService();
   DateTime _selectedDate = DateTime.now();
-  GardeType _selectedShiftType = GardeType.NUIT;
+  GardeType _selectedShiftType = GardeType.nuit;
 
   void _addShift() {
     // Prevent declaring shifts in the past
@@ -65,7 +65,7 @@ class _GardeCalendarScreenState extends State<GardeCalendarScreen> {
       governorate: pharmacy.governorate,
       shiftDate: _selectedDate,
       shiftType: _selectedShiftType,
-      notes: _selectedShiftType == GardeType.NUIT
+      notes: _selectedShiftType == GardeType.nuit
           ? 'Garde Officielle de Nuit CNOP (19:30 - 08:30)'
           : 'Garde Dimanche & Jour Férié (24h)',
     );
@@ -211,8 +211,8 @@ class _GardeCalendarScreenState extends State<GardeCalendarScreen> {
                                 initialValue: _selectedShiftType,
                                 decoration: const InputDecoration(border: OutlineInputBorder(), contentPadding: EdgeInsets.symmetric(horizontal: 12, vertical: 8)),
                                 items: const [
-                                  DropdownMenuItem(value: GardeType.NUIT, child: Text('🌙 Garde de Nuit (19:30 - 08:30)')),
-                                  DropdownMenuItem(value: GardeType.DIMANCHE_FERIE, child: Text('☀️ Dimanche & Jour Férié (24h)')),
+                                  DropdownMenuItem(value: GardeType.nuit, child: Text('🌙 Garde de Nuit (19:30 - 08:30)')),
+                                  DropdownMenuItem(value: GardeType.dimancheFerie, child: Text('☀️ Dimanche & Jour Férié (24h)')),
                                 ],
                                 onChanged: (val) {
                                   if (val != null) setState(() => _selectedShiftType = val);
@@ -288,7 +288,7 @@ class _GardeCalendarScreenState extends State<GardeCalendarScreen> {
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
-                          shift.shiftType == GardeType.NUIT ? Icons.nights_stay : Icons.wb_sunny,
+                          shift.shiftType == GardeType.nuit ? Icons.nights_stay : Icons.wb_sunny,
                           color: isToday ? AppTheme.pharmacyGreen : AppTheme.cnamBlue,
                         ),
                       ),

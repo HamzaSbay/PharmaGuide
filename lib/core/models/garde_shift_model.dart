@@ -1,4 +1,4 @@
-enum GardeType { NUIT, DIMANCHE_FERIE, JOUR }
+enum GardeType { nuit, dimancheFerie, jour }
 
 class GardeShiftModel {
   final String id;
@@ -15,7 +15,7 @@ class GardeShiftModel {
     required this.pharmacyName,
     required this.governorate,
     required this.shiftDate,
-    this.shiftType = GardeType.NUIT,
+    this.shiftType = GardeType.nuit,
     this.notes = 'Garde Officielle CNOP',
   });
 
@@ -26,12 +26,16 @@ class GardeShiftModel {
       pharmacyName: json['pharmacy_name'] ?? '',
       governorate: json['governorate'] ?? '',
       shiftDate: DateTime.tryParse(json['shift_date'] ?? '') ?? DateTime.now(),
-      shiftType: GardeType.values.firstWhere(
-        (e) => e.name == json['shift_type'],
-        orElse: () => GardeType.NUIT,
-      ),
+      shiftType: _parseShiftType(json['shift_type']?.toString()),
       notes: json['notes'] ?? 'Garde Officielle CNOP',
     );
+  }
+
+  static GardeType _parseShiftType(String? str) {
+    final s = (str ?? '').toUpperCase();
+    if (s.contains('DIMANCHE') || s.contains('FERIE')) return GardeType.dimancheFerie;
+    if (s.contains('JOUR')) return GardeType.jour;
+    return GardeType.nuit;
   }
 
   Map<String, dynamic> toJson() {
@@ -41,7 +45,7 @@ class GardeShiftModel {
       'pharmacy_name': pharmacyName,
       'governorate': governorate,
       'shift_date': shiftDate.toIso8601String(),
-      'shift_type': shiftType.name,
+      'shift_type': shiftType == GardeType.dimancheFerie ? 'DIMANCHE_FERIE' : (shiftType == GardeType.jour ? 'JOUR' : 'NUIT'),
       'notes': notes,
     };
   }

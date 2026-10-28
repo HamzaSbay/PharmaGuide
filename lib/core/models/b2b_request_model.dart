@@ -1,7 +1,7 @@
 import 'drug_model.dart';
 import 'pharmacy_model.dart';
 
-enum B2BRequestStatus { PENDING, APPROVED, REJECTED, COMPLETED }
+enum B2BRequestStatus { pending, approved, rejected, completed }
 
 class B2BRequestModel {
   final String id;
@@ -22,7 +22,7 @@ class B2BRequestModel {
     required this.targetPharmacyId,
     required this.drugId,
     required this.quantity,
-    this.status = B2BRequestStatus.PENDING,
+    this.status = B2BRequestStatus.pending,
     this.notes,
     required this.createdAt,
     this.requestingPharmacy,
@@ -63,13 +63,13 @@ class B2BRequestModel {
   static B2BRequestStatus _parseStatus(String? statusStr) {
     switch (statusStr?.toUpperCase()) {
       case 'APPROVED':
-        return B2BRequestStatus.APPROVED;
+        return B2BRequestStatus.approved;
       case 'REJECTED':
-        return B2BRequestStatus.REJECTED;
+        return B2BRequestStatus.rejected;
       case 'COMPLETED':
-        return B2BRequestStatus.COMPLETED;
+        return B2BRequestStatus.completed;
       default:
-        return B2BRequestStatus.PENDING;
+        return B2BRequestStatus.pending;
     }
   }
 
@@ -80,7 +80,7 @@ class B2BRequestModel {
       'target_pharmacy_id': targetPharmacyId,
       'drug_id': drugId,
       'quantity': quantity,
-      'status': status.name,
+      'status': status.name.toUpperCase(),
       'notes': notes,
       'created_at': createdAt.toIso8601String(),
     };

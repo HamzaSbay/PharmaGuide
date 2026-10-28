@@ -20,18 +20,18 @@ void main() {
     );
 
     final latestReq = mockService.b2bRequests.first;
-    expect(latestReq.status, equals(B2BRequestStatus.PENDING));
+    expect(latestReq.status, equals(B2BRequestStatus.pending));
     expect(latestReq.quantity, equals(5));
 
     // Approve the request
-    mockService.updateB2BRequestStatus(latestReq.id, B2BRequestStatus.APPROVED);
+    mockService.updateB2BRequestStatus(latestReq.id, B2BRequestStatus.approved);
     final approvedReq = mockService.b2bRequests.firstWhere((r) => r.id == latestReq.id);
-    expect(approvedReq.status, equals(B2BRequestStatus.APPROVED));
+    expect(approvedReq.status, equals(B2BRequestStatus.approved));
 
     // Reject the request
-    mockService.updateB2BRequestStatus(latestReq.id, B2BRequestStatus.REJECTED);
+    mockService.updateB2BRequestStatus(latestReq.id, B2BRequestStatus.rejected);
     final rejectedReq = mockService.b2bRequests.firstWhere((r) => r.id == latestReq.id);
-    expect(rejectedReq.status, equals(B2BRequestStatus.REJECTED));
+    expect(rejectedReq.status, equals(B2BRequestStatus.rejected));
   });
 
   test('Reservation cancellation or decline restores stock in inventory', () async {
@@ -61,8 +61,8 @@ void main() {
         .quantity;
     expect(decrementedQty, equals(initialQty - 1));
 
-    // Cancel reservation (DECLINED) restores the stock (+1)
-    mockService.updateReservationStatus(res.id, ReservationStatus.DECLINED);
+    // Cancel reservation (declined) restores the stock (+1)
+    mockService.updateReservationStatus(res.id, ReservationStatus.declined);
     final restoredQty = mockService.inventories
         .firstWhere((i) => i.pharmacyId == pharmacyId && i.drugId == drugId)
         .quantity;

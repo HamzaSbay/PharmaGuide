@@ -27,8 +27,8 @@ class MockDataService extends ChangeNotifier {
   void _autoExpireHolds() {
     bool changed = false;
     for (int i = 0; i < _reservations.length; i++) {
-      if (_reservations[i].isExpired && _reservations[i].status == ReservationStatus.PENDING) {
-        _reservations[i] = _reservations[i].copyWith(status: ReservationStatus.EXPIRED);
+      if (_reservations[i].isExpired && _reservations[i].status == ReservationStatus.pending) {
+        _reservations[i] = _reservations[i].copyWith(status: ReservationStatus.expired);
         changed = true;
       }
     }
@@ -1521,7 +1521,7 @@ class MockDataService extends ChangeNotifier {
         pharmacyName: 'Pharmacie Principale El Menzah',
         governorate: 'Tunis',
         shiftDate: today,
-        shiftType: GardeType.NUIT,
+        shiftType: GardeType.nuit,
         notes: 'Garde Officielle de Nuit CNOP (19:30 - 08:30)',
       ),
       GardeShiftModel(
@@ -1530,7 +1530,7 @@ class MockDataService extends ChangeNotifier {
         pharmacyName: 'Pharmacie Central Habib Bourguiba',
         governorate: 'Ariana',
         shiftDate: today,
-        shiftType: GardeType.NUIT,
+        shiftType: GardeType.nuit,
         notes: 'Garde Officielle de Nuit CNOP (19:30 - 08:30)',
       ),
       GardeShiftModel(
@@ -1539,7 +1539,7 @@ class MockDataService extends ChangeNotifier {
         pharmacyName: 'Pharmacie du Lac',
         governorate: 'Ariana',
         shiftDate: today.add(const Duration(days: 1)),
-        shiftType: GardeType.DIMANCHE_FERIE,
+        shiftType: GardeType.dimancheFerie,
         notes: 'Garde Dimanche / Jour Férié (24h)',
       ),
       GardeShiftModel(
@@ -1548,7 +1548,7 @@ class MockDataService extends ChangeNotifier {
         pharmacyName: 'Pharmacie Ennasr',
         governorate: 'Sousse',
         shiftDate: today,
-        shiftType: GardeType.NUIT,
+        shiftType: GardeType.nuit,
         notes: 'Garde Officielle de Nuit CNOP (19:30 - 08:30)',
       ),
     ]);
@@ -1698,7 +1698,7 @@ class MockDataService extends ChangeNotifier {
     String? prescriptionUrl,
   }) async {
     final activeHolds = _reservations.where((r) =>
-        r.patientId == patientId && r.status == ReservationStatus.PENDING && !r.isExpired).length;
+        r.patientId == patientId && r.status == ReservationStatus.pending && !r.isExpired).length;
 
     if (activeHolds >= 2) {
       throw Exception('Limite atteinte: Vous ne pouvez pas avoir plus de 2 réservations actives simultanément.');
@@ -1714,7 +1714,7 @@ class MockDataService extends ChangeNotifier {
       pharmacyId: pharmacyId,
       drugId: drugId,
       prescriptionImageUrl: prescriptionUrl,
-      status: ReservationStatus.PENDING,
+      status: ReservationStatus.pending,
       createdAt: DateTime.now(),
       expiresAt: DateTime.now().add(const Duration(hours: 2)),
       drug: drug,
@@ -1738,7 +1738,7 @@ class MockDataService extends ChangeNotifier {
       _reservations[index] = oldRes.copyWith(status: newStatus);
 
       // Trigger instant SMS notification when reservation is confirmed
-      if (newStatus == ReservationStatus.CONFIRMED) {
+      if (newStatus == ReservationStatus.confirmed) {
         int hash = oldRes.id.hashCode.abs() % 900000 + 100000;
         String counterCode = 'PG-$hash';
         SmsService().sendReservationConfirmedSms(
@@ -1747,7 +1747,7 @@ class MockDataService extends ChangeNotifier {
           drugName: oldRes.drug?.brandName ?? 'Médicament',
           counterCode: counterCode,
         );
-      } else if (newStatus == ReservationStatus.DECLINED || newStatus == ReservationStatus.EXPIRED) {
+      } else if (newStatus == ReservationStatus.declined || newStatus == ReservationStatus.expired) {
         // Restore stock for the pharmacy (+1 box)
         final invIndex = _inventories.indexWhere((i) => i.pharmacyId == oldRes.pharmacyId && i.drugId == oldRes.drugId);
         if (invIndex != -1) {
@@ -1833,7 +1833,7 @@ class MockDataService extends ChangeNotifier {
       targetPharmacyId: targetPharmacyId,
       drugId: drugId,
       quantity: quantity,
-      status: B2BRequestStatus.PENDING,
+      status: B2BRequestStatus.pending,
       notes: notes,
       createdAt: DateTime.now(),
     );
@@ -2099,7 +2099,7 @@ class MockDataService extends ChangeNotifier {
         patientPhone: patientPhone,
         pharmacyId: pharmacyId,
         drugId: drugId,
-        status: ReservationStatus.PENDING,
+        status: ReservationStatus.pending,
         expiresAt: DateTime.now().add(const Duration(hours: 2)),
         createdAt: DateTime.now(),
         pharmacy: pharmacy,

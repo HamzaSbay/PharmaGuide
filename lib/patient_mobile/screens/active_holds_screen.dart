@@ -31,30 +31,30 @@ class _ActiveHoldsScreenState extends State<ActiveHoldsScreen> {
 
   Color _getStatusColor(ReservationStatus status) {
     switch (status) {
-      case ReservationStatus.CONFIRMED:
+      case ReservationStatus.confirmed:
         return AppTheme.pharmacyGreen;
-      case ReservationStatus.DECLINED:
+      case ReservationStatus.declined:
         return Colors.red;
-      case ReservationStatus.COLLECTED:
+      case ReservationStatus.collected:
         return Colors.blue;
-      case ReservationStatus.EXPIRED:
+      case ReservationStatus.expired:
         return Colors.grey;
-      case ReservationStatus.PENDING:
+      case ReservationStatus.pending:
         return Colors.amber.shade800;
     }
   }
 
   String _getStatusLabel(ReservationStatus status) {
     switch (status) {
-      case ReservationStatus.CONFIRMED:
+      case ReservationStatus.confirmed:
         return 'ACCEPTÉ (Prêt au guichet)';
-      case ReservationStatus.DECLINED:
+      case ReservationStatus.declined:
         return 'REFUSÉ';
-      case ReservationStatus.COLLECTED:
+      case ReservationStatus.collected:
         return 'RETIRÉ EN OFFICINE';
-      case ReservationStatus.EXPIRED:
+      case ReservationStatus.expired:
         return 'EXPIRÉ (2h dépassé)';
-      case ReservationStatus.PENDING:
+      case ReservationStatus.pending:
         return 'EN ATTENTE DE CONFIRMATION';
     }
   }
@@ -92,7 +92,7 @@ class _ActiveHoldsScreenState extends State<ActiveHoldsScreen> {
             ),
             onPressed: () {
               Navigator.pop(ctx);
-              _mockData.updateReservationStatus(res.id, ReservationStatus.DECLINED);
+              _mockData.updateReservationStatus(res.id, ReservationStatus.declined);
               if (mounted) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
@@ -305,8 +305,8 @@ class _ActiveHoldsScreenState extends State<ActiveHoldsScreen> {
                             ),
                           ],
                         ),
-                        if (res.status == ReservationStatus.PENDING ||
-                            res.status == ReservationStatus.CONFIRMED) ...[
+                        if (res.status == ReservationStatus.pending ||
+                            res.status == ReservationStatus.confirmed) ...[
                           const SizedBox(height: 10),
                           const Divider(height: 1),
                           const SizedBox(height: 4),

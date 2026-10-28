@@ -127,7 +127,7 @@ class _PharmacistDashboardState extends State<PharmacistDashboard> with SingleTi
       orElse: () => _mockData.pharmacies.first,
     );
     final myReservations = _mockData.reservations.where((r) => r.pharmacyId == _currentPharmacyId).toList();
-    final pendingCount = myReservations.where((r) => r.status == ReservationStatus.PENDING).length;
+    final pendingCount = myReservations.where((r) => r.status == ReservationStatus.pending).length;
     final emergencyBroadcasts = _mockData.emergencyBroadcasts;
 
     return Scaffold(
